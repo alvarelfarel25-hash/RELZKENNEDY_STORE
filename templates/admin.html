@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - RELZKENNEDY_STORE</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css"
+    >
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+        RELZKENNEDY<span>_STORE</span>
+    </div>
+
+    <div class="header-actions">
+
+        <a
+            href="{{ url_for('index') }}"
+            class="admin-btn"
+        >
+            🏪 Toko
+        </a>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="admin-btn logout-btn"
+        >
+            🚪 Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= ADMIN CONTENT ================= -->
+
+<main class="admin-page">
+
+    <!-- HERO ADMIN -->
+
+    <section class="admin-hero">
+
+        <div>
+
+            <span class="admin-tag">
+                ADMIN PANEL
+            </span>
+
+            <h1>
+                Kelola Toko
+            </h1>
+
+            <p>
+                Tambahkan dan kelola produk RELZKENNEDY_STORE.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TAMBAH PRODUK ================= -->
+
+    <section class="admin-box">
+
+        <div class="admin-box-header">
+
+            <div>
+                <h2>
+                    ➕ Tambah Produk
+                </h2>
+
+                <p>
+                    Tambahkan produk baru ke toko.
+                </p>
+            </div>
+
+        </div>
+
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            id="productForm"
+            class="admin-form"
+        >
+
+            <div class="admin-form-grid">
+
+                <!-- NAMA -->
+
+                <div class="admin-field">
+
+                    <label for="name">
+                        Nama Produk
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Nama produk"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- HARGA -->
+
+                <div class="admin-field">
+
+                    <label for="price">
+                        Harga
+                    </label>
+
+                    <input
+                        type="text"
+                        id="price"
+                        name="price"
+                        placeholder="Contoh: Rp 25.000"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- KATEGORI -->
+
+                <div class="admin-field">
+
+                    <label for="category">
+                        Kategori
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="Aplikasi">
+                            📱 Aplikasi
+                        </option>
+
+                        <option value="Game">
+                            🎮 Game
+                        </option>
+
+                        <option value="Akun">
+                            👤 Akun
+                        </option>
+
+                        <option value="Jasa">
+                            🛠️ Jasa
+                        </option>
+
+                        <option value="Lainnya" selected>
+                            📦 Lainnya
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="admin-field">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select
+                        id="status"
+                        name="status"
+                        required
+                    >
+
+                        <option value="Tersedia">
+                            🟢 Tersedia
+                        </option>
+
+                        <option value="Habis">
+                            🔴 Habis
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESKRIPSI -->
+
+            <div class="admin-field">
+
+                <label for="description">
+                    Deskripsi
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Tulis deskripsi produk..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- GAMBAR -->
+
+            <div class="admin-field">
+
+                <label for="image">
+                    Gambar Produk
+                </label>
+
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                >
+
+                <small class="admin-help">
+                    Gunakan gambar yang jelas. Gambar akan dipotong menjadi persegi.
+                </small>
+
+            </div>
+
+
+            <!-- CROP -->
+
+            <div
+                id="cropContainer"
+                class="crop-container"
+                style="display: none;"
+            >
+
+                <div class="crop-title">
+                    ✂️ Atur Gambar
+                </div>
+
+                <div class="crop-box">
+
+                    <img
+                        id="cropImage"
+                        src=""
+                        alt="Preview gambar"
+                    >
+
+                </div>
+
+                <button
+                    type="button"
+                    id="cropButton"
+                    class="admin-main-btn"
+                >
+                    ✓ Gunakan Gambar
+                </button>
+
+                <p id="cropStatus">
+                    Belum ada gambar yang dipotong.
+                </p>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <div class="admin-submit">
+
+                <button
+                    type="submit"
+                    class="admin-main-btn"
+                >
+                    ➕ Tambahkan Produk
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================= DAFTAR PRODUK ================= -->
+
+    <section class="admin-box">
+
+        <div class="admin-box-header">
+
+            <div>
+                <h2>
+                    📦 Produk Toko
+                </h2>
+
+                <p>
+                    Produk yang sedang ada di toko.
+                </p>
+            </div>
+
+            <span class="admin-product-count">
+                {{ products|length }} Produk
+            </span>
+
+        </div>
+
+
+        {% if products %}
+
+        <div class="products admin-products">
+
+            {% for product in products %}
+
+            <div class="product-card admin-product-card">
+
+                <!-- GAMBAR -->
+
+                {% if product.image %}
+
+                <div class="product-image-wrap">
+
+                    <img
+                        src="{{ url_for('static', filename='images/' + product.image) }}"
+                        alt="{{ product.name }}"
+                        class="product-image"
+                    >
+
+                </div>
+
+                {% else %}
+
+                <div class="product-image-wrap">
+
+                    <div class="no-image">
+                        📦
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- INFORMASI -->
+
+                <div class="product-info">
+
+                    <!-- KATEGORI -->
+
+                    <span class="category-badge">
+
+                        {% if product.category == "Aplikasi" %}
+                            📱 Aplikasi
+
+                        {% elif product.category == "Game" %}
+                            🎮 Game
+
+                        {% elif product.category == "Akun" %}
+                            👤 Akun
+
+                        {% elif product.category == "Jasa" %}
+                            🛠️ Jasa
+
+                        {% else %}
+                            📦 Lainnya
+
+                        {% endif %}
+
+                    </span>
+
+
+                    <!-- STATUS -->
+
+                    {% if product.status == "Habis" %}
+
+                    <span class="status-badge status-habis">
+                        🔴 HABIS
+                    </span>
+
+                    {% else %}
+
+                    <span class="status-badge status-tersedia">
+                        🟢 TERSEDIA
+                    </span>
+
+                    {% endif %}
+
+
+                    <h3>
+                        {{ product.name }}
+                    </h3>
+
+
+                    <p class="product-price">
+                        {{ product.price }}
+                    </p>
+
+
+                    <!-- ADMIN ACTION -->
+
+                    <div class="admin-card-actions">
+
+                        <a
+                            href="{{ url_for('edit_product', product_id=product.id) }}"
+                            class="edit-btn"
+                        >
+                            ✏️ Edit
+                        </a>
+
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('delete_product', product_id=product.id) }}"
+                            onsubmit="return confirm('Yakin ingin menghapus produk ini?');"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-btn"
+                            >
+                                🗑️ Hapus
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h3>
+                Belum ada produk
+            </h3>
+
+            <p>
+                Tambahkan produk pertama lu melalui form di atas.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 RELZKENNEDY_STORE
+    </p>
+
+</footer>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

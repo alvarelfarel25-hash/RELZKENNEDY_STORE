@@ -1,0 +1,271 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Produk - RelzKennedy Store</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        RELZ<span>KENNEDY</span>
+
+    </div>
+
+
+    <a
+        href="/admin"
+        class="admin-btn"
+        style="text-decoration: none;"
+    >
+
+        ← Kembali
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     FORM EDIT
+===================================================== -->
+
+<section class="products-section">
+
+    <h2>
+        ✏️ Edit Produk
+    </h2>
+
+
+    <form
+        action="{{ url_for(
+            'edit_product',
+            product_id=product.id
+        ) }}"
+        method="POST"
+        enctype="multipart/form-data"
+        class="product-card"
+        style="padding: 25px;"
+    >
+
+
+        <!-- NAMA -->
+
+        <label>
+            Nama Produk
+        </label>
+
+
+        <input
+            type="text"
+            name="name"
+            value="{{ product.name }}"
+            required
+        >
+
+
+
+        <!-- HARGA -->
+
+        <label>
+            Harga
+        </label>
+
+
+        <input
+            type="text"
+            name="price"
+            value="{{ product.price }}"
+            required
+        >
+
+
+
+        <!-- DESKRIPSI -->
+
+        <label>
+            Deskripsi
+        </label>
+
+
+        <textarea
+            name="description"
+            rows="6"
+            required
+        >{{ product.description }}</textarea>
+
+
+
+        <!-- STATUS -->
+
+        <label>
+            Status Produk
+        </label>
+
+
+        <select
+            name="status"
+            style="
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                border: 1px solid #333344;
+                background: #0f0f18;
+                color: white;
+                outline: none;
+                font-size: 15px;
+            "
+        >
+
+
+            <option
+                value="Tersedia"
+                {% if product.status == "Tersedia" %}
+                    selected
+                {% endif %}
+            >
+
+                🟢 Tersedia
+
+            </option>
+
+
+            <option
+                value="Habis"
+                {% if product.status == "Habis" %}
+                    selected
+                {% endif %}
+            >
+
+                🔴 Habis
+
+            </option>
+
+
+        </select>
+
+
+
+        <!-- GAMBAR LAMA -->
+
+        <label>
+            Gambar Saat Ini
+        </label>
+
+
+        {% if product.image %}
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/' + product.image
+                ) }}"
+                alt="{{ product.name }}"
+                style="
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 12px;
+                    margin-bottom: 15px;
+                "
+            >
+
+        {% else %}
+
+            <p
+                style="
+                    color: #888;
+                    margin-bottom: 15px;
+                "
+            >
+
+                Tidak ada gambar
+
+            </p>
+
+        {% endif %}
+
+
+
+        <!-- GANTI GAMBAR -->
+
+        <label>
+            Ganti Gambar
+        </label>
+
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+        >
+
+
+
+        <!-- TOMBOL -->
+
+        <button
+            type="submit"
+            class="detail-btn"
+            style="
+                border: none;
+                cursor: pointer;
+                margin-top: 20px;
+                width: 100%;
+            "
+        >
+
+            💾 Simpan Perubahan
+
+        </button>
+
+
+    </form>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 RelzKennedy Store
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
+```

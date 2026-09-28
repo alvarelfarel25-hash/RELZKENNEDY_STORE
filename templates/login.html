@@ -1,0 +1,332 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login Admin - RelzKennedy</title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+
+    <style>
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #21173b,
+                    #0b0b12 55%
+                );
+
+        }
+
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 420px;
+
+        }
+
+
+        .login-box {
+
+            background: #151521;
+
+            border: 1px solid #29293a;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .login-logo {
+
+            text-align: center;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-logo span {
+
+            color: #8b5cf6;
+
+        }
+
+
+        .login-title {
+
+            text-align: center;
+
+            color: #aaa;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .login-box label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #ddd;
+
+            font-weight: bold;
+
+        }
+
+
+        .login-box input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            margin-bottom: 18px;
+
+            border-radius: 9px;
+
+            border: 1px solid #333344;
+
+            background: #0f0f18;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+
+        }
+
+
+        .login-box input:focus {
+
+            border-color: #8b5cf6;
+
+        }
+
+
+        .login-button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #8b5cf6;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-button:hover {
+
+            background: #7c3aed;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .login-error {
+
+            background: #3b1515;
+
+            border: 1px solid #7f1d1d;
+
+            color: #fca5a5;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+        }
+
+
+        .back-store {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #999;
+
+            text-decoration: none;
+
+        }
+
+
+        .back-store:hover {
+
+            color: white;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+    <div class="login-box">
+
+
+        <div class="login-logo">
+
+            RELZ<span>KENNEDY</span>
+
+        </div>
+
+
+        <p class="login-title">
+
+            🔐 Login Administrator
+
+        </p>
+
+
+        {% if error %}
+
+            <div class="login-error">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="{{ url_for('login') }}"
+        >
+
+
+            <label>
+
+                Username
+
+            </label>
+
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Masukkan username"
+                autocomplete="username"
+                required
+            >
+
+
+            <label>
+
+                Password
+
+            </label>
+
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                🔓 Masuk ke Admin
+
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="/"
+            class="back-store"
+        >
+
+            ← Kembali ke toko
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
+```

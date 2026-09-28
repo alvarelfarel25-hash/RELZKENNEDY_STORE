@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} - RelzKennedy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            RELZ<span>KENNEDY</span>
+        </div>
+
+        <a href="/" class="admin-btn">
+            ← Kembali
+        </a>
+
+    </header>
+
+
+    <section class="products-section">
+
+        <div class="product-card">
+
+            {% if product.image %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/' + product.image
+                    ) }}"
+                    alt="{{ product.name }}"
+                >
+
+            {% endif %}
+
+
+            <div class="product-info">
+
+                <h1>
+                    {{ product.name }}
+                </h1>
+
+                <p class="price">
+                    Rp {{ product.price }}
+                </p>
+
+                <p class="description">
+                    {{ product.description }}
+                </p>
+
+
+                <div class="contact-buttons">
+
+                    <a
+                        href="https://wa.me/6282257548537?text=Halo%20kak,%20saya%20mau%20order%20{{ product.name }}"
+                        target="_blank"
+                        class="whatsapp"
+                    >
+                        Order WhatsApp
+                    </a>
+
+                    <a
+                        href="https://t.me/Relzhere"
+                        target="_blank"
+                        class="telegram"
+                    >
+                        Telegram
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 RelzKennedy Store
+        </p>
+
+    </footer>
+
+</body>
+</html>
